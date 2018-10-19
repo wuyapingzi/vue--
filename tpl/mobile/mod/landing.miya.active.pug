@@ -1,0 +1,66 @@
+- var _planImg = [{index: 'landing-miya-plan-a.png', desc: 'landing-miya-plan-desc-1.png', picture: 'landing-miya-plan-picture-1.png'}, {index: 'landing-miya-plan-b.png', desc: 'landing-miya-plan-desc-3-0601.png', picture: 'landing-miya-plan-picture-3.png'}, {index: 'landing-miya-plan-c.png', desc: 'landing-miya-plan-desc-9-0601.png', picture: 'landing-miya-plan-picture-6.png'}]
+- var _activeDescrib = [{month: '1', invest: '1', income: '100'}, {month: '3', invest: '2', income: '200'}, {month: '9', invest: '5', income: '850'}]
+ - var _activeDesc = [{amount: 100, limit:10000, month: '1'}, {amount: 200, limit:20000, month: '3', extraRate: '0.5%'}, {amount: 850, limit:50000, month: '9'}]
+.landing-miya-plan-title
+  img(src="/img/mobile/landing-miya-plan-title.png")
+  .plan-desc 1000元起投 期限灵活
+if isLogin
+  .landing-miya-first-invest.landing-miya-first-invest-top
+    img(src="/img/mobile/landing-miya-first-invest-0531.png", alt="")
+.landing-miya-plan-list
+  each item, idx in _planList
+    - var _id = _.get(item, 'id') || 0;
+    - var _month = _.get(item, 'lockPeriod') || ''
+    - var _rate = _.get(item, 'baseInterestRate') || 0
+    - var _extraRate = _.get(item, 'extraInterestRate') || 0
+    .landing-miya-plan-item
+      img.item-index(src="/img/mobile/" + _planImg[idx].index)
+      .item-header 红利智投#{_month}个月
+      .item-body
+        .item-body-rate(class={'item-body-rate-active': _isMiyaActiveUser})
+          .item-rate #{_rate}%
+            if _extraRate
+              span.item-rate-extra +#{_extraRate}%
+          if _isMiyaActiveUser && _extraRate 
+            span.item-exclusive.item-miya 蜜芽专享
+          else if _extraRate
+            span.item-exclusive 蜜芽专享
+          .item-desc 平均年化收益
+        .item-body-month(class={'item-body-month-active': _isMiyaActiveUser})
+          .item-income #{_month}个月
+          .item-desc 投资期限
+        if _isMiyaActiveUser
+          .item-body-join
+            a.J_jump-to-app(data-path='/plan/detail', data-productid = _id)  加入 
+      .item-wrap
+        img.item-example(src="/img/mobile/" + _planImg[idx].desc)
+        img.item-picture(src="/img/mobile/" + _planImg[idx].picture)
+    .landing-miya-plan-desc
+      | 首次投资#{_activeDescrib[idx].month}月期产品#{_activeDescrib[idx].invest}万元，红小宝再额外送您
+      span #{_activeDescrib[idx].income}
+      | 元宝宝成长助力金！
+if !isLogin
+  .landing-miya-first-invest
+    img(src="/img/mobile/landing-miya-first-invest-0531.png", alt="")
+.landing-miya-divide(class={'landing-miya-divide-alone': isLogin})
+  img(src="/img/mobile/landing-miya-divide.png", alt="")
+.landing-miya-active
+  .landing-miya-active-desc
+    .desc-title 活动说明
+    ol
+      li 活动时间：2018年5月24日起，本活动仅针对活动期间通过蜜芽渠道注册的新用户；
+      li 活动期间，在红小宝注册并开户的用户可以获得20元蜜芽券，无门槛全场通用。 蜜芽券将在完成开户第二日上午以短信的形式发送至您的注册手机号；
+      li 活动期间，新用户注册后首次投资任意产品1000元即可获得50元成长助力金，单笔出借达到以下条件，即可领取更多奖励：
+        table
+          tr
+            td 助力成长金
+            td 出借金额
+            td 出借期限
+          each item, idx in _activeDesc
+            tr
+              td #{item.amount}元
+              td #{item.limit}元
+              td #{item.month}个月
+        | 助力金奖励将在投资完成第二日上午直接充值到您的红小宝账户，可以随时提现或用作投资；
+      li 对活动如有任何疑问，敬请咨询红小宝客服热线400-1552-888；
+      li 本活动规则解释权归红小宝所有。

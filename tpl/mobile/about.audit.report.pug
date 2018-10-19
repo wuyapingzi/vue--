@@ -1,0 +1,20 @@
+extend base
+
+block title
+  | #{aboutTitle}
+
+block subnav
+  include ./mod/sub.nav.pug
+
+block page-val
+  - var pageClass = 'about-wrap'
+
+block content
+  .about-audit
+    .nothing-data
+      img(src='/img/mobile/about-audit-nothing.png')
+      p 审计完成后披露
+
+block foot-script
+  script.
+    app.scrollPosition.init();

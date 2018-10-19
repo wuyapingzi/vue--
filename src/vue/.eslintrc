@@ -1,0 +1,24 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0,
+    "no-underscore-dangle": 0,
+    "camelcase": [0, { "properties": "never" }],
+    "quotes": [2, "single"],
+    "no-await-in-loop": "off",
+    "no-dupe-args": "error",
+    "no-sparse-arrays": "error",
+    "no-trailing-spaces": "error",
+    "no-return-assign": 0,
+    "semi": [2, "never"],
+    "space-before-function-paren": [2, "never"],
+    "no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+    ]
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  }
+}

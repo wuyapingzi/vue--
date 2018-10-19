@@ -1,0 +1,18 @@
+extend base
+
+block title
+  | #{aboutTitle} -
+
+block subnav
+  include ./mod/sub.nav.pug
+
+block content
+  .about-audit
+    .section.case
+      .about-audit-title
+        h3 审计报告
+        p Audit Report
+      .about-audit-content
+        .nothing-data
+          img(src='/img/about-audit-nothing.png')
+          p 审计完成后披露
